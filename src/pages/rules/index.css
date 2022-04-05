@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+
+.input-cont {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  gap: 20px;
+}
+
+.body-cont {
+  padding: 10px;
+}
+
+.title-cont {
+  padding: 10px;
+}
+
+.subtitulo-cont {
+  padding: 10px;
+}
+
+.listo {
+  margin-top: 40px;
+}
