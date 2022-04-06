@@ -110,13 +110,13 @@ export function initWin (params){
     <div class="center">
     <component-meme variant="win"></component-meme>
     <div class="desktop"><div class="container">
-            <h2 class="h2">Score<h2>
+            <h2 class="h2">Puntaje<h2>
             <div class="h3-container">
                 <h3 class="h3">Vos: ${counterWins().user}   </h3>
                 <h3 class="h3">Maquína: ${counterWins().pc}   </h3>
             </div>
     </div></div>
-    <div class="desktop"><div class="buttom-container"><component-button class="jugar">volver a jugar</component-button></div></div>
+    <div class="desktop"><div class="buttom-container"><component-button class="jugar">Jugar otra vez</component-button></div></div>
     </div>
                 
     `

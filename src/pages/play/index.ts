@@ -45,16 +45,7 @@ export function initPlay(params) {
                 position: fixed;
                 bottom: -40px;
             }
-            .papel{
-                
-            }
-            .piedra{
-                
-                
-            }
-            .tijeras{
-                
-            }
+            
             .move-container{
                 display:flex;
                 position: fixed;
@@ -97,8 +88,6 @@ export function initPlay(params) {
                 }
             }
             
-                
-            
             .pcAnimation{
                 animation-duration: 3s;
                 animation-name: slidein;
@@ -111,7 +100,6 @@ export function initPlay(params) {
                 }
               
                 to {
-                  
                   margin-top: 34%;
                   height: 50px;
                 }
@@ -130,7 +118,6 @@ export function initPlay(params) {
                     }
                   
                     to {
-                      
                       margin-top: 10%;
                       height: 50px;
                     }
@@ -165,7 +152,6 @@ export function initPlay(params) {
                 to {
                     margin-bottom: 140px;
                     height: 50px;
-                  
                 }
               }
               @media (min-width: 769px) {
@@ -242,12 +228,6 @@ export function initPlay(params) {
     const userTijeras: any = div.querySelector(".user-tijeras");
     const userPapel: any = div.querySelector(".user-papel");
     const userPiedra: any = div.querySelector(".user-piedra");
-
-
-
-
-
-// solo me muestra la imagen de cuando pierdo, incluso cuando gano
 
 
 
