@@ -1,17 +1,17 @@
-import { initWelcomePage} from "./pages/welcome/index"
-import {initLoose} from "./pages/result/loose/index"
-import {initWin} from "./pages/result/win/index"
-import { initRules } from "./pages/rules/index"
-import {initPlay} from "./pages/play/index"
-import {initTie} from "./pages/result/tie/index"
+import { initWelcomePage} from "./pages/welcome"
+import {initLoose} from "./pages/result/loose"
+import {initWin} from "./pages/result/win"
+import { initRules } from "./pages/rules"
+import {initPlay} from "./pages/play"
+import {initTie} from "./pages/result/tie"
 
   
 
 const BASE_PATH = "/desafio-m5";
 
-function isGithubPages() {
-  return location.host.includes("github.io");
-}
+// function isGithubPages() {
+//   return location.host.includes("github.io");
+// }
 
 const routes = [
     {
@@ -41,9 +41,9 @@ const routes = [
 export function initRouter (container){
 
     function goTo(path) {
-        const completePath = isGithubPages() ? BASE_PATH + path : path;
-        history.pushState({}, "", completePath);
-        handleRoute(completePath);
+        
+        history.pushState({}, "", path);
+        handleRoute(path);
       }
 
     function handleRoute(route) {
