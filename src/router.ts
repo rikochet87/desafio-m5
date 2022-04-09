@@ -66,7 +66,7 @@ export function initRouter (container){
 
 
     if (location.host.includes("github.io")){
-      goTo("/inicio")
+      goTo(BASE_PATH + "/inicio")
     }else if(location.pathname == "/"){
       goTo("/inicio")
     }
