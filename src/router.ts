@@ -65,15 +65,25 @@ export function initRouter (container){
       }
 
 
-    if (location.host.includes("github.io")){
-      goTo("/inicio")
-    }else if(location.pathname == "/"){
-      goTo("/inicio")
-    }
-    else{handleRoute(location.pathname);}
+    // if (location.host.includes("github.io")){
+    //   goTo("/inicio")
+    // }else if(location.pathname == "/"){
+    //   goTo("/inicio")
+    // }
+    // else{handleRoute(location.pathname);}
      
-    window.onpopstate = function (){
+    // window.onpopstate = function (){
+    //   handleRoute(location.pathname);
+    // }
+    if(location.pathname == "/"){
+      goTo("/welcome");
+    }else{
       handleRoute(location.pathname);
     }
-    
+    if(location.host.includes(".github.io")){
+      goTo("desafio-m5/welcome");
+    }
+    window.onpopstate = () =>{
+      handleRoute(location.pathname);
+    };
   }
