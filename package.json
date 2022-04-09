@@ -1,6 +1,7 @@
 {
   "name": "desafio-m5",
   "version": "1.0.0",
+  "license": "MIT",
   "description": "",
   "scripts": {
     "dev": "parcel serve ./src/index.html",
