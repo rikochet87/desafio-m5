@@ -1,38 +1,36 @@
-import {state} from "../../../state"
+import { state } from "../../../state";
 
-
-function counterWins (){
-    const currentState = state.getState()
-    const cpuContador = currentState.histoy.filter((e)=>{
-    let contador = 0
-    if (e == 0){
-         contador++
+function counterWins() {
+  const currentState = state.getState();
+  const cpuContador = currentState.histoy.filter((e) => {
+    let contador = 0;
+    if (e == 0) {
+      contador++;
     }
     return contador;
-    })
+  });
 
-    const myContador = currentState.histoy.filter((e)=>{
-      let contador = 0
-      if (e == 1){
-          contador++
-      }
-        return contador;
-    })
-
-    let cpu = cpuContador.length
-    let user = myContador.length
-   
-    return {
-        user: user,
-        pc: cpu
+  const myContador = currentState.histoy.filter((e) => {
+    let contador = 0;
+    if (e == 1) {
+      contador++;
     }
+    return contador;
+  });
+
+  let cpu = cpuContador.length;
+  let user = myContador.length;
+
+  return {
+    user: user,
+    pc: cpu,
+  };
 }
 
-export function initLoose (params){
-    
-    const div = document.createElement("div")
-    const style = document.createElement("style");
-    style.innerHTML = `
+export function initLoose(params) {
+  const div = document.createElement("div");
+  const style = document.createElement("style");
+  style.innerHTML = `
             *{
                 margin:0;
                 box-sizing: border-box;
@@ -70,14 +68,14 @@ export function initLoose (params){
                 text-align: center;
                 font-size: 55px;
                 font-family: 'Odibee Sans', cursive;;
-                color:#000000;
+                color:#009048;
             }
 
             .h3{
                 text-align: center;
                 font-size: 45px;
                 font-family: 'Odibee Sans', cursive;;
-                color:#000000;
+                color:#009048;
             }
             .buttom-container{
                 padding:20px;
@@ -101,8 +99,8 @@ export function initLoose (params){
                     justify-content:center;
                 }}
             
-    `
-    div.innerHTML = `
+    `;
+  div.innerHTML = `
     <div class="center">
     <component-meme variant="loose"></component-meme>
     <div class="desktop"><div class="container">
@@ -113,18 +111,14 @@ export function initLoose (params){
             </div>
     </div></div>
     <div class="desktop"><div class="buttom-container"><component-button class="jugar">Jugar otra vez</component-button></div></div>
-    </div>
-    
-                
-    `
+    </div>               
+    `;
 
-    div.appendChild(style)
+  div.appendChild(style);
 
-    
-
-    const next = div.querySelector(".jugar")
-     next.addEventListener("click",()=>{
-         params.goTo("/rules")
-    })
-    return div;
+  const next = div.querySelector(".jugar");
+  next.addEventListener("click", () => {
+    params.goTo("/rules");
+  });
+  return div;
 }

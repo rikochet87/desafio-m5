@@ -1,42 +1,38 @@
-
-export function initCounter (){
-    class CounterElement extends HTMLElement {
-        shadow = this.attachShadow({mode: 'open'})
-        constructor() { 
-          super();
-          
+export function initCounter() {
+  class CounterElement extends HTMLElement {
+    shadow = this.attachShadow({ mode: "open" });
+    constructor() {
+      super();
+    }
+    connectedCallback() {
+      this.render();
+    }
+    counter() {
+      let contador = 4;
+      let interval = setInterval(() => {
+        contador--;
+        if (contador == 3) {
+          let shadow = this.shadow.querySelector(".counter");
+          shadow.textContent = "3";
+        } else if (contador == 2) {
+          let shadow = this.shadow.querySelector(".counter");
+          shadow.textContent = "2";
+        } else if (contador == 1) {
+          let shadow = this.shadow.querySelector(".counter");
+          shadow.textContent = "1";
+        } else if (contador == 0) {
+          let shadow = this.shadow.querySelector(".counter");
+          shadow.textContent = "0";
+        } else {
+          clearInterval(interval);
         }
-        connectedCallback(){
-            this.render()
-        }
-        counter(){
-            let contador = 4
-            let interval = setInterval(()=>{
-                contador--
-                if (contador == 3){
-                    
-                    let shadow = this.shadow.querySelector(".counter")
-                    shadow.textContent = "3"
-                }else if(contador == 2){
-                    
-                    let shadow = this.shadow.querySelector(".counter")
-                    shadow.textContent = "2"
-
-                }else if(contador == 1){
-                    
-                    let shadow = this.shadow.querySelector(".counter")
-                    shadow.textContent = "1"
-
-                }else{clearInterval(interval)}
-                
-                
-            },1000);
-            return interval;
-        };
-        render(){
-            this.counter()
-            var style = document.createElement('style');
-            style.textContent = `
+      }, 1000);
+      return interval;
+    }
+    render() {
+      this.counter();
+      var style = document.createElement("style");
+      style.textContent = `
             *{
                 box-sizing: border-box;
             }
@@ -58,22 +54,18 @@ export function initCounter (){
                 width:100%;
                 font-size:150px;
                 font-family:"Odibee Sans";
-                text-align: center;
-                color:#FAFAFA;
+                text-align:center;
+                color: #000000;
             }
             `;
 
-            
-            this.shadow.appendChild(style)
+      this.shadow.appendChild(style);
 
-            var div = document.createElement("div")
-            div.classList.add("counter")
-            div.classList.add("circulo")
-            
-
-            this.shadow.appendChild(div)
-        }
-      }
-      customElements.define('component-counter', CounterElement);
-
+      var div = document.createElement("div");
+      div.classList.add("counter");
+      div.classList.add("circulo");
+      this.shadow.appendChild(div);
+    }
+  }
+  customElements.define("component-counter", CounterElement);
 }

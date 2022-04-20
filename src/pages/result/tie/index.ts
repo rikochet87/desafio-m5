@@ -1,38 +1,36 @@
-import {state} from "../../../state"
+import { state } from "../../../state";
 
-
-function counterWins (){
-    const currentState = state.getState()
-    const cpuContador = currentState.histoy.filter((e)=>{
-    let contador = 0
-    if (e == 0){
-         contador++
+function counterWins() {
+  const currentState = state.getState();
+  const cpuContador = currentState.histoy.filter((e) => {
+    let contador = 0;
+    if (e == 0) {
+      contador++;
     }
     return contador;
-    })
+  });
 
-    const myContador = currentState.histoy.filter((e)=>{
-      let contador = 0
-      if (e == 1){
-          contador++
-      }
-        return contador;
-    })
-
-    let cpu = cpuContador.length
-    let user = myContador.length
-   
-    return {
-        user: user,
-        pc: cpu
+  const myContador = currentState.histoy.filter((e) => {
+    let contador = 0;
+    if (e == 1) {
+      contador++;
     }
+    return contador;
+  });
+
+  let cpu = cpuContador.length;
+  let user = myContador.length;
+
+  return {
+    user: user,
+    pc: cpu,
+  };
 }
 
-export function initTie (params){
-    
-    const div = document.createElement("div")
-    const style = document.createElement("style");
-    style.innerHTML = `
+export function initTie(params) {
+  const div = document.createElement("div");
+  const style = document.createElement("style");
+  style.innerHTML = `
             *{
                 margin:0;
                 
@@ -58,8 +56,6 @@ export function initTie (params){
                     width:404px;
                 }}
 
-
-
             .h3-container{
                 display:flex;
                 width: 100%;
@@ -67,7 +63,6 @@ export function initTie (params){
                 justify-content: end;
                 align-items: flex-end;
                 text-align: end;
-
 
             }
             .h2-container{
@@ -108,8 +103,8 @@ export function initTie (params){
                     justify-content:center;
                 }}
             
-    `
-    div.innerHTML = `
+    `;
+  div.innerHTML = `
     <div class="center">
     <component-meme variant="tie"></component-meme>
     <div class="desktop"><div class="container">
@@ -123,14 +118,13 @@ export function initTie (params){
     </div>
     
                 
-    `
-    
-    div.appendChild(style)
+    `;
 
-    
-    const next = div.querySelector(".jugar")
-     next.addEventListener("click",()=>{
-         params.goTo("/rules")
-     }) 
-    return div;
+  div.appendChild(style);
+
+  const next = div.querySelector(".jugar");
+  next.addEventListener("click", () => {
+    params.goTo("/rules");
+  });
+  return div;
 }

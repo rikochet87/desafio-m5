@@ -14,7 +14,6 @@ export function initText (){
                 *{
                     box-sizing: border-box;
                 }
-
                 
                 .title{
                     font-size: 80px;
@@ -34,7 +33,7 @@ export function initText (){
                     font-size: 90px;
                     font-weight: bold;
                     font-family: 'Odibee Sans', cursive;;
-                    color:white;
+                    color: #009048;
                     text-align:center;
                     margin-bottom:20px;
                     text-decoration: underline;    

@@ -40,7 +40,7 @@ export function initWelcomePage (params){
             padding:40px;
             max-width:317px;
             margin-top: -50px;
-            color: #FAFAFA
+            color: #009048;
 
         }
         .move-container{

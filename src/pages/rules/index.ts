@@ -1,12 +1,28 @@
-
-import { state } from "../../state"
-
-
+import { state } from "../../state";
 
 export function initRules(params) {
+  const div = document.createElement("div");
 
-    const style = document.createElement("style")
-    style.innerHTML = `
+  div.innerHTML = `
+        <div class="container">
+            <div class="text-container">
+                 <component-text variant="body">Presioná jugar
+                 y elegí: piedra, papel o tijera antes de que pasen los 3 segundos.
+                </component-text>
+            </div>
+            <div class="buttom-container">
+                <component-button class="jugar">¡Jugar!</component-button>
+            </div>    
+        </div>     
+        <div class="desktop"> <div class="move-container">
+                <div class="hand"><move-papel></move-papel></div>
+                <div class="hand"><move-piedra></move-piedra></div>
+                <div class="hand"><move-tijeras></move-tijeras></div>
+        </div></div>
+    `;
+
+  const style = document.createElement("style");
+  style.innerHTML = `
         *{
             box-sizing: border-box;
         }
@@ -42,7 +58,7 @@ export function initRules(params) {
             justify-content: center;
             padding:40px;
             max-width:317px;
-            color: #FAFAFA
+            color: #009048;
         }
         @media (min-width: 769px) {
             .text-container{
@@ -83,34 +99,12 @@ export function initRules(params) {
                 justify-content: center;
             }
         }
-    `
+    `;
 
-    const div = document.createElement("div")
-
-    div.innerHTML = `
-        <div class="container">
-            <div class="text-container">
-                 <component-text variant="body">Presioná jugar
-                 y elegí: piedra, papel o tijera antes de que pasen los 3 segundos.
-                </component-text>
-            </div>
-            <div class="buttom-container">
-                <component-button class="jugar">¡Jugar!</component-button>
-            </div>    
-        </div>     
-        <div class="desktop"> <div class="move-container">
-                <div class="hand"><move-papel></move-papel></div>
-                <div class="hand"><move-piedra></move-piedra></div>
-                <div class="hand"><move-tijeras></move-tijeras></div>
-        </div></div>
-    `
-
-
-
-    const next = div.querySelector(".jugar")
-    next.addEventListener("click", () => {
-        params.goTo("/play")
-    })
-    div.appendChild(style)
-    return div;
+  const next = div.querySelector(".jugar");
+  next.addEventListener("click", () => {
+    params.goTo("/play");
+  });
+  div.appendChild(style);
+  return div;
 }
