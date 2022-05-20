@@ -1,112 +1,42 @@
-export function initWelcomePage (params){
-    
-    const style = document.createElement("style")
-    style.innerHTML = `
-        *{
-            box-sizing: border-box;
-        }
-        body{
-            margin:0;
-        }
-        .container{
-            display: flex;
-            width: 100%;
-            flex-direction: column;
-            align-items: center;
-            justify-content: baseline;
-            height: 100vh;
-            padding:20px;
-            gap:20px;
-        }
-        @media (min-width: 769px) {
-            .container {
-               
-                height: inherit;
+const welcome = require("../../images/welcome.png");
 
-            }
-          }
+export function init(params) {
+  const div = document.createElement("div");
+  div.classList.add("page");
+  const style = document.createElement("style");
 
-        .mostrar{
-            display:none;
-        }
-        .buttom-container{
-            width:100%;
-            max-width:404px;
-        }
-        .text-container{
-            font-size: 75px;
-            align-items: center;
-            justify-content: center;
-            padding:40px;
-            max-width:317px;
-            margin-top: -50px;
-            color: #009048;
+  div.innerHTML = `
+    <img class="ppt-img" src="${welcome}">
+    <button-comp class="btn-comp">Inicio</button-comp>
+	<div class="hands">
+		<hand-scissor></hand-scissor>
+		<hand-stone></hand-stone>
+		<hand-paper></hand-paper>
+	</div>
+  `;
+  style.innerHTML = `
+	.page {
+		width: 100%;
+		height: 100vh;
+		padding-top: 100px;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	.ppt-img {
+		width: 284px;
+	}
+	.hands {
+		width: 100%;
+		display: flex;
+		justify-content: space-evenly;
+	}`;
 
-        }
-        .move-container{
-            display:flex;
-            width:100%;
-            position: fixed;
-            bottom: 10px;
-            height: 150px;
-            justify-content: center;
-            padding:0 5px;
-
-        }
-        @media (min-width: 769px) {
-            .move-container{
-                height: 21.277481vh;
-                width:500px;
-                padding:0;
-                gap:67px;
-
-            }
-        }
-        
-
-
-        @media (min-width: 769px) {
-            .hand{
-                width:100%;
-            }
-        }
-        .desktop{}
-        @media (min-width: 769px) {
-            .desktop{
-                display:flex;
-                width:100%;
-                
-                justify-content: center;
-            }
-        }
-        
-    `
-    
-    const div = document.createElement("div")
-    div.innerHTML = `
-        <div class="container">
-            <div class="text-container">
-                 <component-text variant="title">Piedra Papel ó Tijeras</component-text>
-            </div>
-            <div class="buttom-container">
-                <component-button class="jugar">¡Jugar!</component-button>
-            </div>  
-        </div>       
-        <div class="desktop"><div class="move-container">
-                <div class="hand "><move-papel></move-papel></div>
-                <div class="hand "><move-piedra></move-piedra></div>
-                <div class="hand "><move-tijeras></move-tijeras></div>
-        </div>        
-        </div>
-    `
-    
-    
-
-    const next = div.querySelector(".jugar")
-    next.addEventListener("click",()=>{
-         params.goTo("/rules")
-     })
-    div.appendChild(style);
-    return div;
+  const button = div.querySelector(".btn-comp");
+  button.addEventListener("click", () => {
+    params.goTo("/desafio-m5/rules");
+  });
+  div.appendChild(style);
+  return div;
 }
-

@@ -1,87 +1,111 @@
-type Jugado = "piedra" | "papel" | "tijera" | "";
-type Jugar = {
-  jugadaMia: Jugado;
-  jugadaPc: Jugado;
-};
+type Jugada = "piedra" | "papel" | "tijera";
 
 const state = {
   data: {
     currentGame: {
-      jugadaMia: "",
-      jugadaPc: "",
+      myPlay: "",
+      computerPlay: "",
     },
-    histoy: [],
+    history: {
+      myScore: 0,
+      computerScore: 0,
+    },
   },
-  listeners: [],
-  init() {
-    let localData = localStorage.getItem("saved-state");
-    if (localData !== null) {
-      this.setState(JSON.parse(localData));
-    } else {
-      this.setState({
-        currentGame: {
-          jugadaMia: "",
-          jugadaPc: "",
-        },
-        histoy: [],
-      });
+
+  getStorage() {
+    const local = JSON.parse(localStorage.getItem("data"));
+    if (localStorage.getItem("data")) {
+      this.data.history = local;
     }
   },
+
   getState() {
     return this.data;
   },
 
   setState(newState) {
     this.data = newState;
-    for (const cb of this.listeners) {
-      cb();
-    }
-    localStorage.setItem("saved-state", JSON.stringify(newState));
   },
 
-  subscribe(callback) {
-    this.listeners.push(callback);
-  },
-
-  addCurrentPlay(jugadaMia: Jugado, jugadaPc: Jugado) {
-    const data = this.getState();
-    const newData = {
-      ...data,
-      currentGame: { jugadaMia: jugadaMia, jugadaPc: jugadaPc },
+  setMove(move: Jugada) {
+    const currentState = this.getState();
+    currentState.currentGame.myPlay = move;
+    const machineMove = () => {
+      const manos = ["tijera", "piedra", "papel"];
+      return manos[Math.floor(Math.random() * 3)];
     };
-    this.setState(newData);
-    this.whoWins({ jugadaMia, jugadaPc });
+    currentState.currentGame.computerPlay = machineMove();
+    this.setHistory();
   },
 
-  whoWins(played: Jugar) {
-    const data = this.getState();
+  whowins() {
+    const currentState = this.getState();
+    const jugada = currentState.currentGame;
 
-    const ganeConPapel =
-      played.jugadaMia == "papel" && played.jugadaPc == "piedra";
-    const GaneConPiedra =
-      played.jugadaMia == "piedra" && played.jugadaPc == "tijera";
-    const GaneConTijera =
-      played.jugadaMia == "tijera" && played.jugadaPc == "papel";
-    const gane = [ganeConPapel, GaneConPiedra, GaneConTijera].includes(true);
+    const empate = [
+      jugada.myPlay == "tijera" && jugada.computerPlay == "tijera",
+      jugada.myPlay == "piedra" && jugada.computerPlay == "piedra",
+      jugada.myPlay == "papel" && jugada.computerPlay == "papel",
+    ];
 
-    const perdiConPapel =
-      played.jugadaPc == "papel" && played.jugadaMia == "piedra";
-    const perdiConPiedra =
-      played.jugadaPc == "piedra" && played.jugadaMia == "tijera";
-    const perdiConTijera =
-      played.jugadaPc == "tijera" && played.jugadaMia == "papel";
-    const perdi = [perdiConPapel, perdiConPiedra, perdiConTijera].includes(
-      true
-    );
-
-    if (gane == true) {
-      data.histoy.push(1);
-      this.setState(data);
-    } else if (perdi == true) {
-      data.histoy.push(0);
-      this.setState(data);
+    if (empate.includes(true)) {
+      return "empate";
     }
+
+    const juego = [
+      jugada.myPlay == "tijera" && jugada.computerPlay == "papel",
+      jugada.myPlay == "piedra" && jugada.computerPlay == "tijera",
+      jugada.myPlay == "papel" && jugada.computerPlay == "piedra",
+    ];
+
+    if (juego.includes(true)) {
+      return "victoria";
+    } else {
+      return "derrota";
+    }
+  },
+
+  setHistory() {
+    const currentWhoWins = this.whowins();
+    const currentState = this.getState();
+    const myScore = currentState.history.myScore;
+    const computerScore = currentState.history.computerScore;
+
+    if (currentWhoWins == "victoria") {
+      this.setState({
+        ...currentState,
+        history: {
+          myScore: myScore + 1,
+          computerScore: computerScore,
+        },
+      });
+    }
+    if (currentWhoWins == "derrota") {
+      this.setState({
+        ...currentState,
+        history: {
+          myScore: myScore,
+          computerScore: computerScore + 1,
+        },
+      });
+    }
+
+    this.savedData();
+  },
+
+  savedData() {
+    const currentState = this.getState().history;
+    localStorage.setItem("data", JSON.stringify(currentState));
+  },
+
+  cleanData() {
+    localStorage.setItem(
+      "data",
+      JSON.stringify({
+        myScore: 0,
+        computerScore: 0,
+      })
+    );
   },
 };
-
 export { state };
